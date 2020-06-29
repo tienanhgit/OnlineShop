@@ -1,8 +1,12 @@
-﻿using System;
+﻿using OnlineShop.Areas.Admin.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Models.Framework;
+using Models;
+using OnlineShop.Areas.Admin.Code;
 
 namespace OnlineShop.Areas.Admin.Controllers
 {
@@ -17,8 +21,29 @@ namespace OnlineShop.Areas.Admin.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult Index()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(LoginModel model)
+        {
+            var result = new AccountModel().Login(model.UserName, model.PassWord);
+            if(result&& ModelState.IsValid)
+            {
+                SessionHelper.SetSession(new UserSession() { UserName=model.UserName});
+                return RedirectToAction("Index", "Home");
+
+            }
+            else
+            {
+                ModelState.AddModelError("", "Ten dang nhap va mat khau khong dung !");
+
+            }
+
+
+
+
+
+            return View(model);
+        }
 
 
     }

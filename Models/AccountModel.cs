@@ -8,16 +8,15 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    class AccountModel
+   public class AccountModel
     {
-
         private OnlineShopDbContext context = null;
         public AccountModel()
         {
             context = new OnlineShopDbContext();
         }
 
-        public bool Login(string UserName ,string PassWord)
+        public bool Login(string UserName, string PassWord)
         {
             object[] sqlPrams =
             {
@@ -26,15 +25,10 @@ namespace Models
 
             };
 
-            var res = context.Database.SqlQuery<bool>("Sp_Accout_Login @UserName,@PassWord",sqlPrams).SingleOrDefault();
+            var res = context.Database.SqlQuery<bool>("Sp_Accout_Login @UserName,@PassWord", sqlPrams).SingleOrDefault();
 
             return res;
         }
-
-
-
-
-
 
     }
 }

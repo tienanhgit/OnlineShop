@@ -15,10 +15,23 @@ namespace OnlineShop.Areas.Admin.Controllers
         // GET: Admin/Login
 
         [HttpGet]
-
         public ActionResult Index()
         {
-            return View();
+   
+            if (ModelState.IsValid)
+            {
+
+                return View();
+
+            }
+            else
+            {
+                ModelState.AddModelError("", "Ten dang nhap va mat khau khong dung !");
+
+            }
+            return null;
+
+
         }
 
         [HttpPost]
@@ -26,7 +39,7 @@ namespace OnlineShop.Areas.Admin.Controllers
         public ActionResult Index(LoginModel model)
         {
             var result = new AccountModel().Login(model.UserName, model.PassWord);
-            if(result&& ModelState.IsValid)
+            if(result|| ModelState.IsValid)
             {
                 SessionHelper.SetSession(new UserSession() { UserName=model.UserName});
                 return RedirectToAction("Index", "Home");

@@ -10,7 +10,7 @@ namespace OnlineShop.Areas.Admin.Code
         public static void SetSession(UserSession session)
         {
             HttpContext.Current.Session["loginSession"] = session;
-
+    
 
         }
         public static UserSession GetSession()

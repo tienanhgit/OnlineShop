@@ -16,6 +16,8 @@ namespace Models.Framework
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
+
         }
     }
 }
